@@ -23,7 +23,7 @@ module V1
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: v1_user_path(@user.id)
+      render json: @user.as_json([:id, :name, :email, :token]), status: :created, location: v1_user_path(@user.id)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
