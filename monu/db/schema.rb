@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019025816) do
+ActiveRecord::Schema.define(version: 20191019070502) do
 
   create_table "posts", force: :cascade do |t|
     t.float "longitude"
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 20191019025816) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["latitude"], name: "index_posts_on_latitude"
+    t.index ["longitude"], name: "index_posts_on_longitude"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
 end
