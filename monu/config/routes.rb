@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     resources :users
     get '/me', to: 'users#me'
     post 'login', to: 'users#log_in'
+
     resources :posts
+
+    post 'images/:post_id', to: 'images#create'
+    get 'images/:post_id', to: 'images#show'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

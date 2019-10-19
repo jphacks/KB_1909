@@ -15,7 +15,10 @@ module V1
         json_post[:body] = post.body
         json_post[:url] = post.url
         json_post[:distance] = distance(lat, lng, post.latitude, post.longitude)
-        json_post[:created_at] =post.created_at.to_i
+        json_post[:created_at] = post.created_at.to_i
+        json_post[:latitude] = lat
+        json_post[:longitude] = lng
+        json_post[:image] = "public/"+Image.find_by(post_id: post.id)
         json_post
       end
       render json: @json_posts.sort_by{|j| j[:distance]}
@@ -24,7 +27,7 @@ module V1
 
     # GET /posts/1
     def show
-      render json: @post
+      render json: Post.all
     end
 
     # POST /posts
